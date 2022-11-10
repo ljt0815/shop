@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 public class Member {
 
     @Id @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private Long id;
 
     @Column(nullable = false, length = 30, unique = true)
