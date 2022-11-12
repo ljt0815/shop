@@ -11,22 +11,22 @@
                 </div>
             </header>
             <div class="d-flex mb-1 justify-content-center" >
-                <form action="/login" method="post">
+                <form action="/join" method="post">
                     <div class="mb-3 mt-3">
+                        <label for="email" class="form-label">아이디:</label>
                         <input type="email" class="form-control" id="email" placeholder="아이디" name="email">
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" id="pwd" placeholder="비밀번호" name="pswd">
+                        <label for="pwd" class="form-label">비밀번호:</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="비밀번호" name="pwd">
                     </div>
-                    <div class="form-check mb-3">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="remember"> 자동 로그인
-                        </label>
+                    <div class="mb-3">
+                        <label for="repwd" class="form-label">비밀번호 재확인:</label>
+                        <input type="password" class="form-control" id="repwd" placeholder="비밀번호" name="repwd">
                     </div>
                     <button type="submit" class="btn btn-outline-dark form-control mb-3">
-                        로그인
+                        회원가입
                     </button>
-                    <a href="/join">회원가입</a>
                 </form>
             </div>
         </div>
