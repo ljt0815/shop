@@ -9,16 +9,13 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-public class Item {
+public class Category {
 
     @Id @GeneratedValue
-    @Column(name = "ITEM_ID")
+    @Column(name = "CATEGORY_ID")
     private Long id;
-
-    @OneToMany(mappedBy = "item")
-    private List<CategoryItem> CategoryItems = new ArrayList<>();
-
     private String name;
-    private int price;
-    private int stockQuantity;
+
+    @OneToMany(mappedBy = "category")
+    private List<CategoryItem> CategoryItems = new ArrayList<>();
 }
