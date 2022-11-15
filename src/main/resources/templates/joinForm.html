@@ -14,7 +14,12 @@
                 <form action="/join" method="post">
                     <div class="mb-3 mt-3">
                         <label for="email" class="form-label">아이디:</label>
-                        <input type="email" class="form-control" id="email" placeholder="아이디" name="email">
+                        <div class="form">
+                            <input type="email" class="form" id="email" placeholder="아이디" name="email">
+                            <button type="button" id="btn--idDupChk" class="btn-sm btn-outline-dark">
+                                중복확인
+                            </button>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="pwd" class="form-label">비밀번호:</label>
@@ -28,6 +33,7 @@
                         회원가입
                     </button>
                 </form>
+                <script src="js/myUser.js"></script>
             </div>
         </div>
     </body>
