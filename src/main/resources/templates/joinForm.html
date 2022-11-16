@@ -10,30 +10,43 @@
                     </div>
                 </div>
             </header>
-            <div class="d-flex mb-1 justify-content-center" >
-                <form action="/join" method="post">
-                    <div class="mb-3 mt-3">
-                        <label for="email" class="form-label">아이디:</label>
+            <div class="d-flex mb-1 justify-content-center">
+                <div>
+                    <div class="mt-3">
+                        <label for="id" class="form-label">아이디:</label>
                         <div class="form">
-                            <input type="email" class="form" id="email" placeholder="아이디" name="email">
+                            <input type="id" class="form" id="id" placeholder="아이디" name="id">
                             <button type="button" id="btn--idDupChk" class="btn-sm btn-outline-dark">
                                 중복확인
                             </button>
+                            <div>
+                                <label class="col-form-label-sm text-danger" id="label-alert" style="font-size: 0.3rem"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="pwd" class="form-label">비밀번호:</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="비밀번호" name="pwd">
+                        <div>
+                            <label class="col-form-label-sm text-success" id="label-pwd-alert" style="font-size: 0.3rem"></label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="re-pwd" class="form-label">비밀번호 재확인:</label>
+                        <input type="password" class="form-control" id="re-pwd" placeholder="비밀번호" name="re-pwd">
+                        <div>
+                            <label class="col-form-label-sm text-danger" id="label-re-pwd-alert" style="font-size: 0.3rem"></label>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="pwd" class="form-label">비밀번호:</label>
-                        <input type="password" class="form-control" id="pwd" placeholder="비밀번호" name="pwd">
+                        <label for="email" class="form-label">이메일:</label>
+                        <input type="email" class="form-control" id="email" placeholder="이메일" name="email">
                     </div>
-                    <div class="mb-3">
-                        <label for="repwd" class="form-label">비밀번호 재확인:</label>
-                        <input type="password" class="form-control" id="repwd" placeholder="비밀번호" name="repwd">
-                    </div>
-                    <button type="submit" class="btn btn-outline-dark form-control mb-3">
+                    <button id="btn-joinProc" class="btn btn-outline-dark form-control mb-3">
                         회원가입
                     </button>
-                </form>
-                <script src="js/myUser.js"></script>
+                </div>
+                <script src="/js/myUser.js"></script>
             </div>
         </div>
     </body>
