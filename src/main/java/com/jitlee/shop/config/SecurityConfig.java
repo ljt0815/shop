@@ -8,11 +8,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 @Configuration //빈등록(IoC관리)
 @EnableWebSecurity //시큐리티 필터 추가 = 스프링 시큐리티를 해당 파일에서 설정한다.
 @RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final AuthenticationFailureHandler customFailureHandler;
 
     // 해당 메서드의 리턴되는 오브젝트를 IoC로 등록해준다.
     @Bean
@@ -30,6 +33,7 @@ public class SecurityConfig {
                 .formLogin()
                 .loginPage("/auth/loginForm")
                 .loginProcessingUrl("/login") //login 주소가 호출이 되면 시큐리티가 낚아채서 대신 로그인을 진행해준다.
+                .failureHandler(customFailureHandler)
                 .defaultSuccessUrl("/")
                 .and()
                 .authorizeRequests(authorize -> authorize.antMatchers("/user/**")
