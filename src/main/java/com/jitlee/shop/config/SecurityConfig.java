@@ -30,6 +30,8 @@ public class SecurityConfig {
                 .csrf().disable()
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 기존것을 사용하지않는거... jwt같은 토큰방식에서사용...
 //                .and()
+                .cors()
+                .and()
                 .formLogin()
                 .loginPage("/auth/loginForm")
                 .loginProcessingUrl("/login") //login 주소가 호출이 되면 시큐리티가 낚아채서 대신 로그인을 진행해준다.
@@ -38,6 +40,8 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests(authorize -> authorize.antMatchers("/user/**")
                         .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+                        .antMatchers("/item/**")
+                        .access("hasRole('ROLE_ADMIN')")
                         .anyRequest().permitAll());
         return http.build();
     }

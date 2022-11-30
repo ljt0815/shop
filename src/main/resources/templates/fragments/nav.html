@@ -31,13 +31,22 @@
                 로그인
             </button>
             </th:block>
-            <form class="d-flex">
-                <button class="btn btn-outline-dark" type="submit">
-                    <i class="bi-cart-fill me-1"></i>
-                    Cart
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+            <div class="d-flex">
+                <button class="btn btn-outline-dark me-1" type="button" onclick="location.href='/item/registerProduct'">
+                    상품등록
                 </button>
-            </form>
+            </div>
+            </th:block>
+            <th:block sec:authorize="!hasRole('ROLE_ADMIN')">
+                <form class="d-flex">
+                    <button class="btn btn-outline-dark" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    </button>
+                </form>
+            </th:block>
         </div>
     </div>
 </nav>

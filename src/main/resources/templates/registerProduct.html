@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default_layout}">
+    <body>
+    <!-- Header-->
+        <div layout:fragment="content">
+            <style>
+                .note-editor .dropdown-toggle::after { all: unset; }
+                .note-editor .note-dropdown-menu { box-sizing: content-box; }
+                .note-editor .note-modal-footer { box-sizing: content-box; }
+            </style>
+            <header class="bg-dark py-5">
+                <div class="container px-4 px-lg-5 my-5">
+                    <div class="text-center text-white">
+                        <h1 class="display-4 fw-bolder">JISINSA</h1>
+                    </div>
+                </div>
+            </header>
+            <script src="/js/summernote/summernote-lite.js"></script>
+            <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+            <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+            <div class="d-flex mb-1 mt-1 justify-content-center">
+                <form action="/item/registerProduct" method="post" enctype="multipart/form-data">
+                    <input type="file" id="chooseFile" name="files" accept="image/*" hidden>
+                    <div class="mb-2">
+                        <img id="preview" style="height: 138px;border:1px solid;" src="/img/productImagePreview.png"/>
+                        <button style="margin-top : 100px" class="btn btn-outline-dark" type="button" id="btn_upload">이미지 찾기</button>
+                    </div>
+                    <div class="mb-2">
+                        <input id="itemName" name="name" class="form-control" placeholder="상품 이름">
+                    </div>
+                    <div class="mb-2">
+                        <input id="itemPrice" name="price" class="form-control" placeholder="상품 가격">
+                    </div>
+                    <div class="mb-2">
+                        <input id="itemStockQuantity" name="stockQuantity" class="form-control" placeholder="상품 수량">
+                    </div>
+                    <textarea id="summernote" name="content"></textarea>
+                    <button class="btn btn-dark mt-2" type="submit" id="btn_register">상품 등록</button>
+                </form>
+            </div>
+            <script src="/js/registerProduct.js"></script>
+        </div>
+    </body>
+</html>
