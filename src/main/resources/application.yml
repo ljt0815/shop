@@ -15,3 +15,9 @@ spring:
 
   profiles:
     include: dbInfo
+
+my:
+  externalStorage: /D:/uploadedImage/
+  imgConnectPath: /imagePath/
+  externalTmpStorage: /D:/tmpImagePath/
+  tmpImgConnectPath: /tmpImagePath/

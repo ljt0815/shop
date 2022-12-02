@@ -18,7 +18,12 @@ public class Item {
     @OneToMany(mappedBy = "item")
     private List<CategoryItem> CategoryItems = new ArrayList<>();
 
-    private String itemImages;
+    @OneToMany(mappedBy = "itemContentImg")
+    private List<ContentImage> ContentImages;
+
+    @OneToMany(mappedBy = "itemProductImg")
+    private List<ProductImage> productImages;
+
     private String name;
     private String content;
     private int price;

@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ItemService {
@@ -20,5 +22,10 @@ public class ItemService {
             return null;
         });
         return item;
+    }
+
+    @Transactional
+    public List<Item> itemList() {
+        return itemRepository.findAll();
     }
 }

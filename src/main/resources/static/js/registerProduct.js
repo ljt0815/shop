@@ -19,7 +19,7 @@ let index = {
             minHeight: null,             // 최소 높이
             maxHeight: null,             // 최대 높이
             lang: "ko-KR",					// 한글 설정
-            placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
+            placeholder: '상품 소개',	//placeholder 설정
             callbacks: {	//여기 부분이 이미지를 첨부하는 부분
                 onImageUpload : function(files) {
                     uploadSummernoteImageFile(files[0],this);
@@ -51,9 +51,11 @@ let index = {
                 url : "/uploadSummernoteImageFile",
                 contentType : false,
                 processData : false,
-                success : function(data) {
+                success : function(resp) {
                     //항상 업로드된 파일의 url이 있어야 한다.
-                    $(editor).summernote('insertImage', data.url);
+                    $(editor).summernote('insertImage', resp.data.url);
+                    const image = $("<input type='hidden' value='" + resp.data.imgName + "' name='images' readonly>");
+                    $("#registerForm").append(image);
                 }
             });
         }
