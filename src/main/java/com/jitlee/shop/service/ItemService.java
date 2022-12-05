@@ -28,4 +28,9 @@ public class ItemService {
     public List<Item> itemList() {
         return itemRepository.findAll();
     }
+
+    @Transactional
+    public void save(Item item) {
+        itemRepository.save(item);
+    }
 }

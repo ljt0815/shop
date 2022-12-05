@@ -24,7 +24,7 @@ public class ImageApiController {
     @Value("${my.externalTmpStorage}")
     private String externalStorage;
 
-    @PostMapping("/uploadSummernoteImageFile")
+    @PostMapping("/admin/uploadSummernoteImageFile")
     public ResponseDto<Map> uploadSummernote(@RequestParam("file")MultipartFile multipartFile) {
 
         Map<String, String> rtn = new HashMap<>();

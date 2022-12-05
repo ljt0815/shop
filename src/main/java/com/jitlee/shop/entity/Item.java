@@ -25,6 +25,7 @@ public class Item {
     private List<ProductImage> productImages;
 
     private String name;
+    @Column(length = 1000)
     private String content;
     private int price;
     private int stockQuantity;

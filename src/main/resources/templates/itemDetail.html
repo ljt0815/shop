@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default_layout}">
+    <body>
+    <!-- Header-->
+        <div layout:fragment="content">
+            <header class="bg-dark py-5">
+                <div class="container px-4 px-lg-5 my-5">
+                    <div class="text-center text-white">
+                        <h1 class="display-4 fw-bolder">JISINSA</h1>
+                    </div>
+                </div>
+            </header>
+            <div class="d-flex mb-1 mt-5 justify-content-center">
+                <div>
+                    <div class="d-flex justify-content-center" style="width: 410px; height: 410px; overflow: hidden; border: 1px solid black;">
+                        <img th:if="${#lists.isEmpty(item.productImages)}" id="productImg" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <img th:unless="${#lists.isEmpty(item.productImages)}" id="productImg" th:src="${connectPath}+${item.productImages[0].filename}" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    </div>
+                </div>
+                <div class="ms-5" style="width: 500px">
+                    <div>
+                        <h4 th:text="${item.name}" style="margin-bottom: 0;"></h4>
+                    </div>
+                    <div class="d-flex small text-warning mb-2">
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star-fill"></div>
+                        <div class="bi-star"></div>
+                    </div>
+                    <hr/>
+                    <div class="mb-2">
+                        <div th:text="${#numbers.formatInteger(item.price, 1, 'COMMA') + '원'}" style="color: #ae0000; font-weight: bold; font-size: 23px"></div>
+                    </div>
+                    <hr/>
+                </div>
+                <hr/>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div id="content" style="width: 958px;">
+                    <div th:utext="'<hr>'+${item.content}" class="mb-1"></div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div style="width: 958px">
+                    <button class="btn btn-dark" style="float: right" type="button" id="btn_edit" th:onclick="'location.href=\'/admin/registerProduct/'+${item.id}+'\''">상품 수정</button>
+                </div>
+            </div>
+            <div class="mb-5">
+
+            </div>
+            <script src="/js/itemDetail.js"></script>
+        </div>
+    </body>
+</html>
