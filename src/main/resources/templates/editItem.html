@@ -19,7 +19,7 @@
             <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
             <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
             <div class="d-flex mb-5 mt-5 justify-content-center">
-                <form th:action="'/admin/registerProduct/'+${item.id}" id="registerForm" action="/admin/registerProduct/" method="put" enctype="multipart/form-data">
+                <form th:action="'/admin/registerProduct/'+${item.id}" id="registerForm" method="put" enctype="multipart/form-data">
                     <input type="file" id="chooseFile" name="files" accept="image/*" hidden>
                     <div class="mb-2">
                         <img th:if="${#lists.isEmpty(item.productImages)}" id="preview" style="height: 138px;border:1px solid;" src="/img/productImagePreview.png"/>
@@ -36,7 +36,7 @@
                         <input th:value="${item.stockQuantity}" id="itemStockQuantity" name="stockQuantity" class="form-control" placeholder="상품 수량">
                     </div>
                     <textarea th:value="${item.content}" th:text="${item.content}" id="summernote" name="content"></textarea>
-                    <button class="btn btn-dark mt-2" type="submit" id="btn_update">상품 등록</button>
+                    <button class="btn btn-dark mt-2" type="submit" id="btn_update">상품 수정</button>
                 </form>
             </div>
             <script src="/js/editItem.js"></script>

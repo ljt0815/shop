@@ -31,20 +31,22 @@
                                 <img th:unless="${#lists.isEmpty(item.productImages)}" th:src="${connectPath}+${item.productImages[0].filename}" class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                             </div>
                             <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
+                            <div class="card-body p-4" style="color: #4d4d4d">
+                                <div>
                                     <!-- Product name-->
-                                    <h5 th:text="${item.name}" class="fw-bolder">Special Item</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div th:text="${item.name}" class="notosanskr productName">aa</div>
+                                    <!-- Product price-->
+                                    <div style="font-family: 'yg-jalnan'; ">
+                                        <span th:text="${#numbers.formatInteger(item.price, 1, 'COMMA')}" style="font-size: 20px; font-weight: bold;">0</span><span class="notosanskr">원</span>
+                                    </div>
+                                    <!-- Product Star-->
+                                    <div class="d-flex small text-warning mb-2">
                                         <div class="bi-star-fill"></div>
                                         <div class="bi-star-fill"></div>
                                         <div class="bi-star-fill"></div>
                                         <div class="bi-star-fill"></div>
                                         <div class="bi-star"></div>
                                     </div>
-                                    <!-- Product price-->
-                                    <span th:text="${#numbers.formatInteger(item.price, 1, 'COMMA') + '원'}">0</span>
                                 </div>
                             </div>
                             <!-- -->

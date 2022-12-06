@@ -93,4 +93,14 @@ public class ItemController {
         }
         return "editItem";
     }
+
+    @PutMapping("/admin/registerProduct/{id}")
+    public String editItemProc(@PathVariable Long id, Model model) {
+        Item item = itemService.find(id);
+        if (item != null) {
+            model.addAttribute("item", item);
+            model.addAttribute("connectPath", connectPath);
+        }
+        return "editItem";
+    }
 }

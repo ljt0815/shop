@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default_layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default_layout}"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
     <body>
     <!-- Header-->
         <div layout:fragment="content">
@@ -18,15 +19,24 @@
                     </div>
                 </div>
                 <div class="ms-5" style="width: 500px">
-                    <div>
-                        <h4 th:text="${item.name}" style="margin-bottom: 0;"></h4>
-                    </div>
-                    <div class="d-flex small text-warning mb-2">
-                        <div class="bi-star-fill"></div>
-                        <div class="bi-star-fill"></div>
-                        <div class="bi-star-fill"></div>
-                        <div class="bi-star-fill"></div>
-                        <div class="bi-star"></div>
+                    <div style="height: 50px;">
+                        <div style="float: left;">
+                            <div>
+                                <h4 th:text="${item.name}" style="margin-bottom: 0;"></h4>
+                            </div>
+                            <div class="d-flex small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star"></div>
+                            </div>
+                        </div>
+                        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                        <div style="float: right;">
+                            <button class="btn btn-dark" type="button" id="btn_edit" th:onclick="'location.href=\'/admin/registerProduct/'+${item.id}+'\''">상품 수정</button>
+                        </div>
+                        </th:block>
                     </div>
                     <hr/>
                     <div class="mb-2">
@@ -41,13 +51,7 @@
                     <div th:utext="'<hr>'+${item.content}" class="mb-1"></div>
                 </div>
             </div>
-            <div class="d-flex justify-content-center">
-                <div style="width: 958px">
-                    <button class="btn btn-dark" style="float: right" type="button" id="btn_edit" th:onclick="'location.href=\'/admin/registerProduct/'+${item.id}+'\''">상품 수정</button>
-                </div>
-            </div>
             <div class="mb-5">
-
             </div>
             <script src="/js/itemDetail.js"></script>
         </div>
