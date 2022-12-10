@@ -14,6 +14,8 @@ public class ProductImage {
     private Long id;
     private String filename;
 
+    private boolean thumbnail;
+
     @ManyToOne
     @JoinColumn(name = "ITEM_ID")
     private Item itemProductImg;

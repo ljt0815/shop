@@ -61,12 +61,23 @@ let index = {
         }
     },
     previewImg: function(e){
-        let file = e.target.files[0];
-        let reader = new FileReader();
-        reader.onload = function(e) {
-            $("#preview").attr("src", e.target.result);
-        };
-        reader.readAsDataURL(file);
+        let file2 = [];
+        let reader2 = [];
+        for (let i = 0; i < e.target.files.length; i++) {
+            reader2[i] = new FileReader();
+            file2[i] = e.target.files[i];
+        }
+        console.log(e.target.files.length);
+        for (let i = 0; i < e.target.files.length; i++) {
+            reader2[i].onload = function (e) {
+                const image = $("<img id='preview"+i+"' style='height: 138px;border:1px solid;'>");
+                $("#productImage").prepend(image);
+                $("#preview"+i).attr("src", e.target.result);
+            }
+        }
+        for (let i = 0; i < e.target.files.length; i++) {
+            reader2[i].readAsDataURL(file2[i]);
+        }
     }
 }
 

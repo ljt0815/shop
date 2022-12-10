@@ -20,9 +20,8 @@
             <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
             <div class="d-flex mb-5 mt-5 justify-content-center">
                 <form id="registerForm" action="/admin/registerProduct" method="post" enctype="multipart/form-data">
-                    <input type="file" id="chooseFile" name="files" accept="image/*" hidden>
-                    <div class="mb-2">
-                        <img id="preview" style="height: 138px;border:1px solid;" src="/img/productImagePreview.png"/>
+                    <input type="file" id="chooseFile" name="files" accept="image/*" hidden multiple>
+                    <div class="mb-2" id="productImage">
                         <button style="margin-top : 100px" class="btn btn-outline-dark" type="button" id="btn_upload">이미지 찾기</button>
                     </div>
                     <div class="mb-2">

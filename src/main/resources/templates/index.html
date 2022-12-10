@@ -28,7 +28,7 @@
                             <!-- Product image-->
                             <div style="height: 180px; overflow: hidden">
                                 <img th:if="${#lists.isEmpty(item.productImages)}" class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                                <img th:unless="${#lists.isEmpty(item.productImages)}" th:src="${connectPath}+${item.productImages[0].filename}" class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                                <img th:unless="${#lists.isEmpty(item.productImages)}" th:src="${item.thumbnail}" class="card-img-top" alt="..." />
                             </div>
                             <!-- Product details-->
                             <div class="card-body p-4" style="color: #4d4d4d">

@@ -1,12 +1,7 @@
 package com.jitlee.shop.controller;
 
-import com.jitlee.shop.entity.ContentImage;
 import com.jitlee.shop.entity.Item;
-import com.jitlee.shop.entity.ProductImage;
-import com.jitlee.shop.repository.ItemRepository;
-import com.jitlee.shop.service.ContentImageService;
 import com.jitlee.shop.service.ItemService;
-import com.jitlee.shop.service.ProductImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -14,23 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.websocket.server.PathParam;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.util.UUID;
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class ItemController {
 
     private final ItemService itemService;
-    private final ContentImageService contentImageService;
-    private final ProductImageService productImageService;
-    @Value("${my.externalStorage}")
-    private String externalStorage;
-    @Value("${my.externalTmpStorage}")
-    private String externalTmpStorage;
+
     @Value("${my.imgConnectPath}")
     private String connectPath;
 
@@ -40,36 +27,20 @@ public class ItemController {
     }
 
     @PostMapping("/admin/registerProduct")
-    public String procRegister(@RequestParam(value = "files", required = false) MultipartFile file,
+    public String procRegister(@RequestParam(value = "files", required = false) List<MultipartFile> files,
                                @RequestParam(value = "images", required = false) String[] images,
+                               @RequestParam(value = "thumbId", required = false) Integer thumbId,
                                Item item) throws Exception{
 
         itemService.save(item);
         if (images != null) {
-            for (String img : images) {
-                File tmp = new File(externalTmpStorage + img);
-                File copyImg = new File(externalStorage + img);
-                if (tmp.exists()) {
-                    Files.copy(tmp.toPath(), copyImg.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                    ContentImage contentImage = new ContentImage();
-                    contentImage.setFilename(img);
-                    contentImage.setItemContentImg(item);
-                    contentImageService.save(contentImage);
-                } else {
-                    copyImg.delete();
-                }
-            }
+            itemService.contentImageSave(item.getId(), images);
         }
-        if (!(file == null || file.isEmpty())) {
-            String originFileName = file.getOriginalFilename();
-            String extension = originFileName.substring(originFileName.lastIndexOf("."));
-            String filePath = UUID.randomUUID() + extension;
-            File dest = new File(externalStorage + filePath);
-            file.transferTo(dest);
-            ProductImage productImage = new ProductImage();
-            productImage.setFilename(filePath);
-            productImage.setItemProductImg(item);
-            productImageService.save(productImage);
+        if (!(files == null || files.isEmpty())) {
+            itemService.productImageSave(item.getId(), files);
+        }
+        if (thumbId != null) {
+            itemService.changeThumbnail(item.getId(), thumbId);
         }
         return "redirect:/";
     }
@@ -94,13 +65,25 @@ public class ItemController {
         return "editItem";
     }
 
-    @PutMapping("/admin/registerProduct/{id}")
-    public String editItemProc(@PathVariable Long id, Model model) {
-        Item item = itemService.find(id);
-        if (item != null) {
-            model.addAttribute("item", item);
-            model.addAttribute("connectPath", connectPath);
+    @PostMapping("/admin/registerProduct/{id}")
+    public String editItemProc(@RequestParam(value = "files", required = false) List<MultipartFile> files,
+                               @RequestParam(value = "images", required = false) String[] images,
+                               @RequestParam(value = "thumbId", required = false) Integer thumbId,
+                               @PathVariable Long id,
+                               Item item) throws IOException {
+        if (images != null) {
+            itemService.contentImageSave(item.getId(), images);
         }
-        return "editItem";
+        if (!(files == null || files.isEmpty())) {
+            itemService.productImageSave(item.getId(), files);
+        }
+        Item findItem = itemService.find(id);
+        findItem.setName(item.getName());
+        findItem.setContent(item.getContent());
+        if (thumbId != null) {
+            itemService.changeThumbnail(id, thumbId);
+        }
+        itemService.save(findItem);
+        return "redirect:/item/"+id;
     }
 }

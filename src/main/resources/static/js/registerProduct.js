@@ -1,3 +1,17 @@
+function selectThumb(id) {
+    let realId;
+    if (id.charAt(0) === 's') {
+        realId = id.substr(12,id.length - 12);
+    }
+    else {
+        realId = id.substr(7,id.length - 7);
+    }
+    let beforeId = $("#thumbId").val();
+    $("#thumbId").val(realId);
+    $("#"+id).attr('style', 'height: 138px; border:5px solid red;')
+    $("#"+beforeId).attr('style', 'height: 138px; border:1px solid black;')
+}
+
 let index = {
     init: function (){
         $('#summernote').summernote({
@@ -61,12 +75,28 @@ let index = {
         }
     },
     previewImg: function(e){
-        let file = e.target.files[0];
-        let reader = new FileReader();
-        reader.onload = function(e) {
-            $("#preview").attr("src", e.target.result);
-        };
-        reader.readAsDataURL(file);
+        let len = $("#productImage").children('img.requireUpload').length;
+        for (let i = 0; i < len; i++) {
+            $("#productImage").children('img.requireUpload')[0].remove();
+        } // 이전 이미지 다 지우기
+        let savedLen = $("#productImage").children('img.savedPreview').length;
+        let file2 = [];
+        let reader2 = [];
+        for (let i = 0; i < e.target.files.length; i++) {
+            reader2[i] = new FileReader();
+            file2[i] = e.target.files[i];
+        }
+        for (let i = 0; i < e.target.files.length; i++) {
+            let imgId = savedLen + i;
+            reader2[i].onload = function (e) {
+                const image = $("<img id='preview" + imgId + "' style='height: 138px;border:1px solid;' class='requireUpload' onclick='selectThumb(this.id)'>");
+                $("#productImage").prepend(image);
+                $("#preview"+imgId).attr("src", e.target.result);
+            }
+        }
+        for (let i = 0; i < e.target.files.length; i++) {
+            reader2[i].readAsDataURL(file2[i]);
+        }
     }
 }
 

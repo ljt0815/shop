@@ -24,6 +24,7 @@ public class Item {
     @OneToMany(mappedBy = "itemProductImg")
     private List<ProductImage> productImages;
 
+    private String thumbnail;
     private String name;
     @Column(length = 1000)
     private String content;
