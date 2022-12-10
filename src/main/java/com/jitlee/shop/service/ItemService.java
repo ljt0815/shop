@@ -82,6 +82,7 @@ public class ItemService {
         }
     }
 
+    @Transactional
     public void changeThumbnail(Long id, int thumbId) {
         Item item = this.find(id);
         List<ProductImage> productImages = item.getProductImages();

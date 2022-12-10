@@ -41,7 +41,12 @@
                     </div>
                     <textarea th:value="${item.content}" th:text="${item.content}" id="summernote" name="content"></textarea>
                     <button class="btn btn-dark mt-2" type="submit" id="btn_update">상품 수정</button>
-                    <input type="hidden" name="thumbId" value="" id="thumbId" readonly>
+                    <input type="hidden" name="thumbId" th:value="${thumbnailIndex}" id="thumbId" readonly>
+                    <script>
+                        if ($("#thumbId").val() != '') {
+                            $("#preview"+$("#thumbId").val()).attr('style', 'height: 138px; border:5px solid red;');
+                        }
+                    </script>
                 </form>
             </div>
             <script src="/js/registerProduct.js"></script>

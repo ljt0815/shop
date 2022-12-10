@@ -1,15 +1,9 @@
 function selectThumb(id) {
-    let realId;
-    if (id.charAt(0) === 's') {
-        realId = id.substr(12,id.length - 12);
-    }
-    else {
-        realId = id.substr(7,id.length - 7);
-    }
+    let realId = id.substr(7,id.length - 7);
     let beforeId = $("#thumbId").val();
     $("#thumbId").val(realId);
     $("#"+id).attr('style', 'height: 138px; border:5px solid red;')
-    $("#"+beforeId).attr('style', 'height: 138px; border:1px solid black;')
+    $("#"+"preview"+beforeId).attr('style', 'height: 138px; border:1px solid black;')
 }
 
 let index = {

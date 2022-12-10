@@ -42,6 +42,7 @@ public class ItemController {
         if (thumbId != null) {
             itemService.changeThumbnail(item.getId(), thumbId);
         }
+
         return "redirect:/";
     }
 
@@ -58,9 +59,18 @@ public class ItemController {
     @GetMapping("/admin/registerProduct/{id}")
     public String editItem(@PathVariable Long id, Model model) {
         Item item = itemService.find(id);
+        String thumbnailIndex = "";
         if (item != null) {
             model.addAttribute("item", item);
             model.addAttribute("connectPath", connectPath);
+            if (item.getThumbnail() != null) {
+                for (int i = 0; i < item.getProductImages().size(); i++) {
+                    if (item.getThumbnail().substring(11).equals(item.getProductImages().get(i).getFilename())){
+                        thumbnailIndex = Integer.toString(i);
+                    }
+                }
+                model.addAttribute("thumbnailIndex", thumbnailIndex);
+            }
         }
         return "editItem";
     }
