@@ -57,6 +57,7 @@ public class ItemService {
                 ContentImage contentImage = new ContentImage();
                 contentImage.setFilename(img);
                 contentImage.setItemContentImg(item);
+                item.getContentImages().add(contentImage);
                 contentImageService.save(contentImage);
             } else {
                 copyImg.delete();
@@ -78,24 +79,45 @@ public class ItemService {
             ProductImage productImage = new ProductImage();
             productImage.setFilename(filePath);
             productImage.setItemProductImg(item);
+            item.getProductImages().add(productImage);
             productImageService.save(productImage);
         }
     }
 
     @Transactional
-    public void changeThumbnail(Long id, int thumbId) {
+    public void changeThumbnail(Long id, Integer thumbId) {
         Item item = this.find(id);
         List<ProductImage> productImages = item.getProductImages();
         if (productImages.isEmpty()) {
             item.setThumbnail("https://dummyimage.com/450x300/dee2e6/6c757d.jpg");
         }
-        else if (thumbId < productImages.size()) {
+        else if (thumbId != null && thumbId < productImages.size()) {
             ProductImage productImage = productImages.get(thumbId);
             String filename = productImage.getFilename();
             item.setThumbnail(connectPath+filename);
         }
         else {
-            item.setThumbnail(productImages.get(0).getFilename());
+            item.setThumbnail(connectPath+productImages.get(0).getFilename());
         }
+    }
+
+    public void deleteById(Long id) {
+        Item item = this.find(id);
+        List<ProductImage> productImages = item.getProductImages();
+        List<ContentImage> contentImages = item.getContentImages();
+        File tmp;
+        for (ProductImage img : productImages) {
+            tmp = new File(externalStorage + img.getFilename());
+            if (tmp.exists()) {
+                tmp.delete();
+            }
+        }
+        for (ContentImage img : contentImages) {
+            tmp = new File(externalStorage + img.getFilename());
+            if (tmp.exists()) {
+                tmp.delete();
+            }
+        }
+        itemRepository.delete(item);
     }
 }

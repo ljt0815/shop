@@ -39,9 +39,7 @@ public class ItemController {
         if (!(files == null || files.isEmpty())) {
             itemService.productImageSave(item.getId(), files);
         }
-        if (thumbId != null) {
-            itemService.changeThumbnail(item.getId(), thumbId);
-        }
+        itemService.changeThumbnail(item.getId(), thumbId);
 
         return "redirect:/";
     }

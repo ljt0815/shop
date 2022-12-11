@@ -18,11 +18,11 @@ public class Item {
     @OneToMany(mappedBy = "item")
     private List<CategoryItem> CategoryItems = new ArrayList<>();
 
-    @OneToMany(mappedBy = "itemContentImg")
-    private List<ContentImage> ContentImages;
+    @OneToMany(mappedBy = "itemContentImg", cascade = CascadeType.REMOVE)
+    private List<ContentImage> ContentImages = new ArrayList<>();
 
-    @OneToMany(mappedBy = "itemProductImg")
-    private List<ProductImage> productImages;
+    @OneToMany(mappedBy = "itemProductImg", cascade = CascadeType.REMOVE)
+    private List<ProductImage> productImages = new ArrayList<>();
 
     private String thumbnail;
     private String name;
@@ -30,4 +30,5 @@ public class Item {
     private String content;
     private int price;
     private int stockQuantity;
+
 }
