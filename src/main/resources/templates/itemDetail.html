@@ -70,6 +70,19 @@
                         <div th:text="${#numbers.formatInteger(item.price, 1, 'COMMA') + '원'}" style="color: #ae0000; font-weight: bold; font-size: 23px"></div>
                     </div>
                     <hr/>
+                    <th:block sec:authorize="!hasRole('ROLE_ADMIN')">
+                        <div class="d-flex">
+                            <div class="d-flex me-2">
+                                <input type="text" id="quantity" value="1" class="quantityNumber">
+                                <div style="width: 20px">
+                                    <button id="quantityUp" class="quantityButton" style="background-image: url('/img/up.png'); margin-bottom: 1px"></button>
+                                    <button id="quantityDown" class="quantityButton" style="background-image: url('/img/down.png')" onclick=""></button>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-dark me-2" type="button" id="btn_cart" style="width: 100%;">장바구니 담기</button>
+                            <button class="btn btn-dark" type="button" id="btn_order" style="width: 100%;">상품 주문</button>
+                        </div>
+                    </th:block>
                 </div>
                 <hr/>
             </div>

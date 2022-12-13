@@ -19,3 +19,16 @@
     -webkit-box-orient: vertical;
     display: -webkit-box;
 }
+
+.quantityNumber {
+    width: 50px;
+    text-align: center;
+}
+
+.quantityButton {
+    width:20px;
+    height: 20px;
+    font-size: 1px;
+    display: block;
+    border: 0px;
+}

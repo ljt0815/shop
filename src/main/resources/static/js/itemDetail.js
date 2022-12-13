@@ -3,6 +3,31 @@ let index = {
         $("#btn_delete").on("click", ()=>{
             if (confirm("정말 삭제하시겠습니까?"))
                 this.delete_proc();
+        });
+        $("#quantityUp").on("click", ()=>{
+            let num = $("#quantity").val();
+            $("#quantity").val(++num);
+        });
+        $("#quantityDown").on("click", ()=>{
+            let num = $("#quantity").val();
+            if (num > 1)
+                $("#quantity").val(--num);
+        });
+        $("#quantity").keydown(function(e) {
+            let a = false;
+            let b = false;
+
+            if (!(e.keyCode >= 96 && e.keyCode <= 105)) {
+                a = true;
+            }
+            if (!(e.keyCode >= 48 && e.keyCode <= 57)) {
+                b = true;
+            }
+            if (a && b) {
+                if (e.keyCode == 8)
+                    return ;
+                e.preventDefault();
+            }
         })
         setTimeout(callback, 50);
     },
@@ -25,6 +50,9 @@ let index = {
         }).fail(function(err){
             alert(JSON.stringify(err));
         });
+    },
+    upProc : function() {
+
     }
 }
 
