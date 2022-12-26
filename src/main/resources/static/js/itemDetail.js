@@ -6,7 +6,9 @@ let index = {
         });
         $("#quantityUp").on("click", ()=>{
             let num = $("#quantity").val();
-            $("#quantity").val(++num);
+            let stockQuantity = $("#stockQuantity").val();
+            if (num < stockQuantity)
+                $("#quantity").val(++num);
         });
         $("#quantityDown").on("click", ()=>{
             let num = $("#quantity").val();
@@ -27,6 +29,11 @@ let index = {
                 if (e.keyCode == 8)
                     return ;
                 e.preventDefault();
+            }
+        });
+        $("#quantity").onchange(() => {
+            if ($("#quantity").val() > $("#stockQuantity").val()) {
+                $("#quantity").val($("#stockQuantity").val());
             }
         })
         setTimeout(callback, 50);

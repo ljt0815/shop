@@ -32,3 +32,11 @@
     display: block;
     border: 0px;
 }
+
+.t-head * {
+    text-align: center;
+}
+
+.t-body * {
+    vertical-align: middle;
+}

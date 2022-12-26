@@ -45,6 +45,8 @@ public class SecurityConfig {
                         .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
                         .antMatchers("/admin/**")
                         .access("hasRole('ROLE_ADMIN')")
+                        //.antMatchers("/order/**")
+                        //.access("hasRole('ROLE_USER')")
                         .anyRequest().permitAll());
         return http.build();
     }

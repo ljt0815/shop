@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default_layout}"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security">
+    <body>
+    <!-- Header-->
+        <div layout:fragment="content">
+            <header class="bg-dark py-5">
+                <div class="container px-4 px-lg-5 my-5">
+                    <div class="text-center text-white">
+                        <h1 class="display-4 fw-bolder">JISINSA</h1>
+                    </div>
+                </div>
+            </header>
+            <div class="d-flex mb-1 mt-5 justify-content-center">
+                <table class="table table-bordered" style="width: 1500px;">
+                    <thead>
+                        <tr class="t-head">
+                            <th scope="col" style="width: 25px;"></th>
+                            <th scope="col" style="width: 80px;">이미지</th>
+                            <th scope="col">상품정보</th>
+                            <th scope="col">판매가</th>
+                            <th scope="col">수량</th>
+                            <th scope="col">합계</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="t-body">
+                            <td><input type="checkbox"></td>
+                            <td><img th:src="${item.thumbnail}" style="width : 78px; height: 78px;"></td>
+                            <td><div th:text="${item.name}"></div></td>
+                            <td style="text-align: right"><div th:text="${#numbers.formatInteger(item.price, 1, 'COMMA')} + '원'"></div></td>
+                            <td style="text-align: center"><div th:text="${quantity}"></div></td>
+                            <td style="text-align: right"><div th:text="${#numbers.formatInteger(quantity * item.price, 1, 'COMMA')} + '원'"></div> </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
