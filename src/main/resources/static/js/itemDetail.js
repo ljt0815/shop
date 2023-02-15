@@ -5,13 +5,13 @@ let index = {
                 this.delete_proc();
         });
         $("#quantityUp").on("click", ()=>{
-            let num = $("#quantity").val();
-            let stockQuantity = $("#stockQuantity").val();
+            let num = parseInt($("#quantity").val());
+            let stockQuantity = parseInt($("#stockQuantity").val());
             if (num < stockQuantity)
                 $("#quantity").val(++num);
         });
         $("#quantityDown").on("click", ()=>{
-            let num = $("#quantity").val();
+            let num = parseInt($("#quantity").val());
             if (num > 1)
                 $("#quantity").val(--num);
         });

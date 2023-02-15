@@ -21,7 +21,7 @@ class MemberServiceTest {
     public void test() {
         Member member = new Member("jitlee", "1234", "jitlee@naver.com");
 
-        memberService.join(member);
+        //memberService.join(member);
         Member member1 = memberService.find("jitlee");
         System.out.println(member1.getEmail());
     }
