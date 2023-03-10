@@ -31,7 +31,6 @@
                             <td style="text-align: right"><div th:text="${#numbers.formatInteger(item.price, 1, 'COMMA')} + '원'"></div></td>
                             <td style="text-align: center"><div th:text="${quantity}"></div></td>
                             <td style="text-align: right"><div th:text="${#numbers.formatInteger(quantity * item.price, 1, 'COMMA')} + '원'"></div> </td>
-
                         </tr>
                     </tbody>
                 </table>
