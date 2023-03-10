@@ -87,6 +87,7 @@ public class ItemController {
         }
         Item findItem = itemService.find(id);
         findItem.setName(item.getName());
+        findItem.setPrice(item.getPrice());
         findItem.setContent(item.getContent());
         if (thumbId != null) {
             itemService.changeThumbnail(id, thumbId);
